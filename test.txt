@@ -1,3 +1,95 @@
-cd Documents 
-cd af
-open test.txt 
+FFMPEG
+
+
+
+Normalize Audio:
+
+-af loudnorm=i=-16:lra=11:tp=-2
+
+-af loudnorm=i=-16:tp=-2:lra=11:measured_i=-27.61:measured_lra=18.06:measured_tp=-4.47:measured_thresh=-39.20:offset=0.58:linear=true:print_format=summary -ar 48k
+
+-af loudnorm=i=-16:tp=-2:lra=11:measured_i=-5:measured_lra=18.06:measured_tp=-2:measured_thresh=-39.20:offset=0.58:linear=true:print_format=summary -ar 48k
+
+-af loudnorm=i=-16:tp=-2:lra=11:measured_i=-27.61:measured_lra=18.06:measured_tp=-2:measured_thresh=-60:offset=0.58:linear=true:print_format=summary -ar 48k
+
+
+
+
+
+反轉視頻顏色：
+
+-vf negate
+
+
+
+
+Change The Tempo Of An (Mp3) Audio Track：
+
+-af atempo=1.5
+
+
+
+
+ 無壓縮轉換：
+-acodec copy -vcodec copy
+
+
+Acompressor:
+
+-af acompressor=threshold=-21dB:ratio=9:attack=200:release=1000
+
+-af loudnorm=i=-16tp=-2:lra=11:measured_i=-5:measured_lra=18.06:measured_tp=-2:measured_thresh=-39.20:offset=0.58:linear=true:print_format=summary -ar 48k
+
+
+
+
+降噪: rystalizer:0-10
+
+-af crystalizer=i=10
+
+
+
+
+Aecho:
+
+-af aecho=delays=100:decays=0.5
+
+-af aecho=delays=10 | 100:decays=0.9 | 0.5
+
+-af aecho=delays=10｜100｜1000｜1500:decays=0.9｜0.5｜0.3｜0.1
+
+-af aecho=0.8:0.88:60:0.4
+
+
+
+
+查看文件大小信息
+du -sh *
+
+
+
+
+Agate:
+
+-af agate=level_in=1:mode=downward:range=0.06125:threshold=0.125:ratio=2:attack=20:release=250:makeup=1:knee=2.828427125:detection=rms:link=average
+
+
+
+
+limiter
+
+-af level_in=1:level_out=1:limit=1:attack=5:release=50:asc=0:asc_level=0:level=enabled
+（Depending on picked setting it is recommended to upsample input 2x or 4x times with aresample before applying this filter.）
+
+
+
+Aresample
+
+-af aresample=44100
+-af aresample=48000
+
+-ar 48k
+
+
+
+
