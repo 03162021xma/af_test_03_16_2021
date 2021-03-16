@@ -1,1 +1,3 @@
-Bitbucket
+cd Documents 
+cd af
+open test.txt 
